@@ -9,10 +9,12 @@ import AppLoading from 'expo-app-loading';
 import 'intl';
 import 'intl/locale-data/jsonp/pt-BR';
 import React from 'react';
+import { StatusBar } from 'react-native';
 import 'react-native-gesture-handler';
 import { ThemeProvider } from 'styled-components/native';
 import theme from './src/global/styles/theme';
-import { AppRoutes } from './src/routes/app.routes';
+import { AuthProvider } from './src/hooks/auth';
+import { SignIn } from './src/screens/SignIn';
 
 
 
@@ -30,7 +32,11 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <NavigationContainer>
-        <AppRoutes />
+        <StatusBar barStyle='light-content' />
+        {/* <AppRoutes /> */}
+        <AuthProvider>
+          <SignIn />
+        </AuthProvider>
       </NavigationContainer>
     </ThemeProvider>
   );
