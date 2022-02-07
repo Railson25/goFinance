@@ -9,6 +9,7 @@ import { RFValue } from "react-native-responsive-fontsize";
 import { useTheme } from 'styled-components';
 import { VictoryPie } from 'victory-native';
 import { HistoryCard } from "../../components/HistoryCard";
+import { useAuth } from '../../hooks/auth';
 import { categories } from '../../utils/categories';
 import {
     ChartContainer, Container, Content, Header, LoadContainer, Month, MonthSelect,
@@ -40,6 +41,7 @@ export function Resume() {
     const [isLoading, setIsLoading] = useState(false)
     const [selectedDate, setSelectedDate] = useState(new Date())
     const [totalByCategories, setTotalByCategories] = useState<CategoryData[]>([])
+    const { user } = useAuth()
 
     const theme = useTheme()
 
@@ -53,7 +55,7 @@ export function Resume() {
 
     async function loadData() {
         setIsLoading(true)
-        const dataKey = '@gofinaces:transactions';
+        const dataKey = `@gofinaces:transactions_user:${user.id}`;
         const response = await AsyncStorage.getItem(dataKey)
         const responseFormated = response ? JSON.parse(response) : []
 
