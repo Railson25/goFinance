@@ -8,4 +8,5 @@ test('check if show correctly user input name placeholder'  , () => {
     
     const inputName = getByPlaceholderText('Nome')
     
+    expect(inputName).toBeTruthy()
 })
