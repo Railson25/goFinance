@@ -10,3 +10,22 @@ test('check if show correctly user input name placeholder'  , () => {
     
     expect(inputName).toBeTruthy()
 })
+
+test('checks if user data has been loaded',  () => {
+    const {getByTestId} = render(<Profile />)
+
+    const inputName = getByTestId('input-name')
+    const inputSurName = getByTestId('input-surname')
+    
+    expect(inputName.props.value).toEqual('Railson')
+    expect(inputSurName.props.value).toEqual('Santiago')
+
+})
+
+test('checks if title render correctly', () => {
+    const {getByTestId} = render(<Profile />)
+
+    const textTitle = getByTestId('text-title')
+
+    expect(textTitle.props.children).toContain('Perfil')
+})
