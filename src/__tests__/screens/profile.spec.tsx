@@ -3,29 +3,32 @@ import {render} from '@testing-library/react-native'
 
 import {Profile} from '../../screens/Profile'
 
-test('check if show correctly user input name placeholder'  , () => {
-    const {getByPlaceholderText} = render(<Profile />)
+describe('Profile', () => {
+    it('shoud have placeholder correctly in user name input'  , () => {
+        const {getByPlaceholderText} = render(<Profile />)
+        
+        const inputName = getByPlaceholderText('Nome')
+        
+        expect(inputName).toBeTruthy()
+    })
     
-    const inputName = getByPlaceholderText('Nome')
+    it('should be loaded user data',  () => {
+        const {getByTestId} = render(<Profile />)
     
-    expect(inputName).toBeTruthy()
+        const inputName = getByTestId('input-name')
+        const inputSurName = getByTestId('input-surname')
+        
+        expect(inputName.props.value).toEqual('Railson')
+        expect(inputSurName.props.value).toEqual('Santiago')
+    
+    })
+    
+    it('should exist title correctly', () => {
+        const {getByTestId} = render(<Profile />)
+    
+        const textTitle = getByTestId('text-title')
+    
+        expect(textTitle.props.children).toContain('Perfil')
+    })
 })
 
-test('checks if user data has been loaded',  () => {
-    const {getByTestId} = render(<Profile />)
-
-    const inputName = getByTestId('input-name')
-    const inputSurName = getByTestId('input-surname')
-    
-    expect(inputName.props.value).toEqual('Railson')
-    expect(inputSurName.props.value).toEqual('Santiago')
-
-})
-
-test('checks if title render correctly', () => {
-    const {getByTestId} = render(<Profile />)
-
-    const textTitle = getByTestId('text-title')
-
-    expect(textTitle.props.children).toContain('Perfil')
-})
