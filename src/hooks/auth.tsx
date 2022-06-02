@@ -3,8 +3,7 @@ import * as AplleAuthentication from 'expo-apple-authentication';
 import * as AuthSession from 'expo-auth-session';
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
-const { CLIENT_ID } = process.env
-const { REDIRECT_URI } = process.env
+
 
 interface AuthProviderProps {
     children: ReactNode
@@ -42,11 +41,13 @@ function AuthProvider({ children }: AuthProviderProps) {
 
 
     async function signInWithGoogle() {
+        console.log('ESTOU AQUUUUUUUUUUUUI')
         try {
 
+            const CLIENT_ID = '583386505260-0nmqnck9ql07fild7jtaq5aah1t4hdjt.apps.googleusercontent.com';
+            const REDIRECT_URI = 'https://auth.expo.io/@railsongoogle/gofinances';
             const RESPONSE_TYPE = 'token';
             const SCOPE = encodeURI('profile email');
-
             const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPE}`;
 
             const { type, params } = await AuthSession
